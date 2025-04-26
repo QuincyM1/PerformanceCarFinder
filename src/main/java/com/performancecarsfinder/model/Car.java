@@ -2,6 +2,7 @@ package com.performancecarsfinder.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "cars")
@@ -18,6 +19,7 @@ public class Car {
     private String drivetrain;
     private double price;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Modification> modifications;
 
@@ -33,7 +35,7 @@ public class Car {
         return make;
     }
 
-    public void setMake(String name){
+    public void setMake(String make){
         this.make = make;
     }
 

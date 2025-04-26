@@ -1,6 +1,8 @@
 package com.performancecarsfinder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
 
 @Entity  // ✅ Marks this class as a database entity
 @Table(name = "modifications")  // ✅ Specifies the table name
@@ -14,8 +16,9 @@ public class Modification {
     private int powerGain;
     private double cost;
 
-    @ManyToOne  // ✅ Defines many-to-one relationship (multiple mods belong to one car)
-    @JoinColumn(name = "car_id", nullable = false)  // ✅ Foreign key reference to Car table
+    @ManyToOne
+    @JoinColumn(name = "car_id", nullable = false)
+    @JsonBackReference  // <<< IMPORTANT: BackReference here
     private Car car;
 
     // ✅ Getters and Setters
